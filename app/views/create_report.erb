@@ -1,0 +1,31 @@
+
+  <h2>Report A Damage</h2>
+  <form role="form">
+    <div class="form-group">
+      <label for="report_title">Report Title:</label>
+      <input type="text" name="report[:report_name]" class="form-control" placeholder="A light post felt down near DBC">
+    </div>
+    <div class="form-group">
+      <label for="report_type">Report an Issue:</label>
+    	<select class="form-control" name="report[:report_name]">
+    			<option value="light_post"> Light Post </option>
+    		  <option value="pothole"> Pothole </option>
+    		  <option value="transformer"> Transformer </option>
+    		  <option value="power_line"> Power_line </option>
+    		  <option value="tree"> Tree </option>
+    	</select>
+    </div>
+    <div class="form-group">
+      <label for="report_address">Issue's address:</label>
+      <input type="text" name="report[:address]" class="form-control" placeholder="633 Folsom St.">
+    </div>
+    <div class="form-group">
+      <label for="lat">Latitude:</label>
+      <input type="number" name="report[:lat]" class="form-control" placeholder="83.62343">
+    </div>
+    <div class="form-group">
+      <label for="lng">Longitude:</label>
+      <input type="number" name="report[:lng]" class="form-control" placeholder="-122.32193">
+    </div>
+    <button type="submit" class="btn btn-info pull-right">Submit</button>
+  </form>
