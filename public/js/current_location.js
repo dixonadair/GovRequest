@@ -1,5 +1,6 @@
 $(function() {
 
+	// Declare mapbox access token and set up map
 	L.mapbox.accessToken = 'pk.eyJ1IjoieXVtaWtvIiwiYSI6IkRDVk43ZjAifQ.aAdCw3xUw8s1QLZzcBUhbA';
 	
 	var geolocate = $('#geolocate'),
@@ -8,6 +9,7 @@ $(function() {
 
 	current_location_map.setView([37.734585, -122.447214], 12);
 
+	// marker generating function
 	var markerGenerator = function(lat, lng, report_issue, report_id) {
 		var marker = L.mapbox.featureLayer({
 		    type: 'Feature',
@@ -23,6 +25,7 @@ $(function() {
 		marker.addTo(current_location_map);
 	};
 
+	// iterate through list of reports and call markerGenerator function to generate markers for each
 	var iterateReports = function(reportsData) {
 		for (var i = 0; i < 32; i++) {
 			console.log(reportsData[i].lat + " " + reportsData[i].lng);
@@ -30,6 +33,7 @@ $(function() {
 	  	}
 	};
 
+	// function which gets collection of reports via ajax call and executes iterateReports on it
   	var list_of_reports = function() {
 		var ajaxRequest = $.ajax({
 			url: '/reports/show',
@@ -43,6 +47,7 @@ $(function() {
 		});
 	};
 
+	// execute the list_of_reports function
   	list_of_reports();
 
 	if (!navigator.geolocation) {

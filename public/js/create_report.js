@@ -10,46 +10,46 @@ $(function(){
 	// Declare the mapbox access token
 	L.mapbox.accessToken = 'pk.eyJ1IjoieXVtaWtvIiwiYSI6IkRDVk43ZjAifQ.aAdCw3xUw8s1QLZzcBUhbA';
 	
-	var getUserGeoinfo = function(lat, lng){
-			// set user current lat + lng based on retrieved user geolocation info
-		  user_current_lat.val(String(lat));
-		  user_current_lng.val(String(lng));
-		  // the lat + lng info is now in the formData, so serialize the formData now
-		  formData = create_report.serialize();
+	var getUserGeoinfo = function(lat, lng) {
+		// set user current lat + lng based on retrieved user geolocation info
+		user_current_lat.val(String(lat));
+		user_current_lng.val(String(lng));
+		// the lat + lng info is now in the formData, so serialize the formData now
+		formData = create_report.serialize();
 
-		  		var ajaxRequest = $.ajax({
-						url: '/reports/create',
-						type: 'POST',
-				    dataType: 'JSON',
-				    data: formData
-					});
-					ajaxRequest.done(function(response){
-						$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
-						// form clear after submission
-						$('form').find("input[type=text], textarea").val("");
-					});
-					ajaxRequest.fail(function(error){
-						console.log('fail');
-					});
-	}
+  		var ajaxRequest = $.ajax({
+				url: '/reports/create',
+				type: 'POST',
+		    	dataType: 'JSON',
+		    	data: formData
+		});
+		ajaxRequest.done(function(response) {
+			$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
+			// form clear after submission
+			$('form').find("input[type=text], textarea").val("");
+		});
+		ajaxRequest.fail(function(error) {
+			console.log('fail');
+		});
+	};
 
 	// When report is submitted:
-	$('#reportSubmit').on('click', function(event){
+	$('#reportSubmit').on('click', function(event) {
 		event.preventDefault();
 		// Capture address param...
 		var report_address = $("#report_address").val();   
 		// ...and as long as it wasn't blank, do...
-		if (report_address !== ''){
+		if (report_address !== '') {
 			var geocoder = L.mapbox.geocoder('mapbox.places');
 			// geocoder.query() takes a queryString (an address in this case), and a callback function into which the result of running geocoder.query() will be put.
 			geocoder.query(report_address, getJsonDataFromMapBox);
 			// getJsonDataFromMapBox() takes an error (if any), and the JSON data from running geocoder.query(). That data has several things, including a latlng array ([lat, lng]), which we want.
 			function getJsonDataFromMapBox(err, data) {
 				debugger;
-		    console.log(data.latlng[0], data.latlng[1]);
-		    // Execute getUserGeoinfo function/ajax request
-		    getUserGeoinfo(data.latlng[0], data.latlng[1]);
-		  }
+		    	console.log(data.latlng[0], data.latlng[1]);
+		    	// Execute getUserGeoinfo function/ajax request
+		    	getUserGeoinfo(data.latlng[0], data.latlng[1]);
+			}
 		}
 
 	});
