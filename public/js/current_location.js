@@ -1,41 +1,78 @@
-(function () {
-	google.load("maps", "2");
-	google.setOnLoadCallback(function () {
-		// Create map
-		var current_user_map = new google.maps.Map2(document.getElementById("user_current_location_map")),
-			markerText = "<h2>You are here</h2><p>Nice with geolocation, ain't it?</p>",
-			markOutLocation = function (lat, long) {
-				var latLong = new google.maps.LatLng(lat, long),
-					marker = new google.maps.Marker(latLong);
-				current_user_map.setCenter(latLong, 13);
-				current_user_map.addOverlay(marker);
-				marker.openInfoWindow(markerText);
-				google.maps.Event.addListener(marker, "click", function () {
-					marker.openInfoWindow(markerText);
-				});
-			};
-			current_user_map.setUIToDefault();
+$(function(){
+	L.mapbox.accessToken = 'pk.eyJ1IjoieXVtaWtvIiwiYSI6IkRDVk43ZjAifQ.aAdCw3xUw8s1QLZzcBUhbA';
+	var geolocate = $('#geolocate');
+	var current_location_map = L.mapbox.map('current_location_map', 'yumiko.lkbilml1');
+	var myLayer = L.mapbox.featureLayer().addTo(current_location_map);
 
-		// Check for geolocation support	
-		if (navigator.geolocation) {
-			// Get current position
-			navigator.geolocation.getCurrentPosition(function (position) {
-					// Success!
-					markOutLocation(position.coords.latitude, position.coords.longitude);
-				}, 
-				function () {
-					// Gelocation fallback: Defaults to Stockholm, Sweden
-					markerText = "<p>Please accept geolocation for me to be able to find you. <br>I've put you in Stockholm for now.</p>";
-					markOutLocation(59.3325215, 18.0643818);
-				}
-			);
-		}
-		else {
-			// No geolocation fallback: Defaults to Eeaster Island, Chile
-			markerText = "<p>No location support. Try Easter Island for now. :-)</p>";
-			markOutLocation(-27.121192, -109.366424);
-		}
-		// ---------------------------
-	});	
-})();
+	var markerGenerator = function(lat, lng, report_issue){
+		var marker = L.mapbox.featureLayer({
+	    type: 'Feature',
+	    geometry: {
+	        type: 'Point',
+	        coordinates: [parseFloat(lat), parseFloat(lng)]
+	    },
+	    properties: {
+	        title: report_issue,
+	        'marker-color': '#f86767'
+	    }
+		}).addTo(current_location_map);
+	}
 
+	var iterateReports = function(reportsData) {
+		for (var i = 0; i < 21; i++) {
+			console.log(reportsData[i].lat + " " + reportsData[i].lng);
+			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name);
+	  }
+	}
+
+  var list_of_reports = function(){
+	$.ajax({
+			url: '/reports/show',
+			type: 'GET',
+		}).done(function(response){
+			iterateReports(response.collection);
+		}).fail(function(error){
+			console.log('fail');
+		});
+	}
+
+  list_of_reports();
+
+	if (!navigator.geolocation) {
+	    geolocate.html('Geolocation is not available');
+	} else {
+			geolocate.on('click',function(e){
+				e.preventDefault();
+				e.stopPropagation();
+				current_location_map.locate();
+			});
+	}
+
+	current_location_map.on('locationfound', function(e) {
+	    current_location_map.fitBounds(e.bounds);
+
+	    var user_geo_data = myLayer.setGeoJSON({
+	        type: 'Feature',
+	        geometry: {
+	            type: 'Point',
+	            coordinates: [e.latlng.lng, e.latlng.lat]
+	        },
+	        properties: {
+	            'title': 'Here I am!',
+	            'marker-color': '#ff8888',
+	            'marker-symbol': 'star'
+	        }
+	    });
+
+	    $('#user_current_lat').val(user_geo_data._geojson.geometry.coordinates[0]);
+	    $('#user_current_lng').val(user_geo_data._geojson.geometry.coordinates[1]);
+
+	    geolocate.remove();
+	});
+
+	current_location_map.on('locationerror', function() {
+	    geolocate.html('Position could not be found');
+	});
+
+
+});

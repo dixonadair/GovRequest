@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- 
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
   <link rel="stylesheet" href="/css/application.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css' rel='stylesheet' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js'></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <script src="http://www.google.com/jsapi?key=AIzaSyBeRCw4xuS5zbC1L4zEWqF8BWrIKHbphHs"></script>
   <script src="/js/application.js"></script>
-  <script src="/js/current_location.js"></script>
+  <script src="/js/create_report.js"></script>
+
   <title></title>
 </head>
 <body>
@@ -29,5 +23,6 @@
 </div>
 <footer>
 </footer> 
+ <script src="/js/current_location.js"></script>
 </body>
 </html>
