@@ -1,31 +1,35 @@
-
-  <h2>Report A Damage</h2>
-  <form role="form">
+  <h2>Welcome, <%= username %>!</h2> 
+  <h4>Report An Issue</h4>
+  <form role="form"> <!-- add action and method -->
     <div class="form-group">
       <label for="report_title">Report Title:</label>
-      <input type="text" name="report[:report_name]" class="form-control" placeholder="A light post felt down near DBC">
+      <input type="text" name="report[:report_name]" class="form-control" placeholder="A light post fell down near DBC">
     </div>
     <div class="form-group">
-      <label for="report_type">Report an Issue:</label>
+      <label for="report_type">Category:</label>
     	<select class="form-control" name="report[:report_name]">
-    			<option value="light_post"> Light Post </option>
-    		  <option value="pothole"> Pothole </option>
-    		  <option value="transformer"> Transformer </option>
-    		  <option value="power_line"> Power_line </option>
-    		  <option value="tree"> Tree </option>
+    			<option value="pothole">Pothole</option>
+    		  <option value="street_light">Street Light Out</option>
+    		  <option value="transformer">Blown-up Transformer</option>
+    		  <option value="power_line">Downed Electrical Line/Pole</option>
+    		  <option value="tree">Fallen Tree or Limb</option>
+          <option value="fire_hydrant">Leaking Fire Hydrant</option>
+          <option value="road_sign">Damaged Road Sign</option>
+          <option value="sewage">Sewage Issue</option>
+          <option value="other">Other</option>
     	</select>
     </div>
     <div class="form-group">
-      <label for="report_address">Issue's address:</label>
+      <label for="report_address">Address:</label>
       <input type="text" name="report[:address]" class="form-control" placeholder="633 Folsom St.">
     </div>
     <div class="form-group">
       <label for="lat">Latitude:</label>
-      <input type="number" name="report[:lat]" class="form-control" placeholder="83.62343">
+      <input type="text" name="report[:lat]" class="form-control" value="100.01" placeholder="83.62343">
     </div>
     <div class="form-group">
       <label for="lng">Longitude:</label>
-      <input type="number" name="report[:lng]" class="form-control" placeholder="-122.32193">
+      <input type="text" name="report[:lng]" class="form-control" value="100.01" placeholder="-122.32193">
     </div>
     <button type="submit" class="btn btn-info pull-right">Submit</button>
   </form>

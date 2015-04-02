@@ -6,8 +6,8 @@ class CreateReports < ActiveRecord::Migration
       t.string :address
       t.float :lat
       t.float :lng
-      t.string :status, :default => 'red'
-      t.integer :votecount, :default => 0
+      t.string :status, :default => 'pending'
+      t.integer :votecount, :default => 1
       t.integer :user_id
       t.integer :department_id, :default => 1
 
@@ -15,3 +15,4 @@ class CreateReports < ActiveRecord::Migration
     end
   end
 end
+

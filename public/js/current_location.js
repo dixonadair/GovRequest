@@ -35,6 +35,7 @@
 			markerText = "<p>No location support. Try Easter Island for now. :-)</p>";
 			markOutLocation(-27.121192, -109.366424);
 		}
+		// ---------------------------
 	});	
 })();
 

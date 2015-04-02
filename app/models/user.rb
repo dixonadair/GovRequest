@@ -3,4 +3,8 @@ class User < ActiveRecord::Base
   has_many :reports
   has_many :comments
   has_many :votes
+
+  def authenticate(input_password)
+    self.password == input_password
+  end
 end
