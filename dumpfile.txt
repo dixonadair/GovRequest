@@ -1,0 +1,83 @@
+-------- From new_comment.erb --------
+
+<div>
+	<div>
+		<div>
+			<h4><%= @report.report_name %></h4>
+		</div>
+		<div>
+			
+		</div>
+	</div>
+
+	<div>
+		<%  %>
+			<%=  %>
+		<% end %>
+	</div>
+
+
+</div>
+
+<form action="/reports/<%= @report_id %>/new_comment" method="post">
+	<textarea name="content" id="report_comment" cols="30" rows="15" placeholder="Your Comment Here"></textarea>
+	<input type="submit" value="Submit Comment">
+</form>
+
+-----------------------
+
+<div>
+	<% @report.comments.each do |comment| %>
+		<div><%= comment.content %></div>
+		<!-- <div><%= comment.user_id %></div> -->
+	<% end %>
+</div>
+
+		<% @commenters_array.each do |commenter| %>
+			<div><%= commenter.name %></div>
+		<% end %>
+
+---------- From comment.rb (controller) file -------------
+
+# @report_id = report.id
+# @report_name = report.report_name
+# @report_creator = report.user_id
+# @report_time = report.created_at
+# @report_votes = report.votecount
+# @report_comments = report.comment.all	
+
+	# @commenters_array = []
+	# @report.comments.each do |comment|
+	# 	commenter_id = comment.user_id
+	# 	@commenters_array << User.find(commenter_id)
+	# end
+
+-----------------------
+
+	<div>
+		<div class="float-left">
+			<div><%= @report.report_name %></div>
+			<div><%= @report_creator.name %></div>
+			<div><%= @report.created_at %></div>
+		</div>
+		<div class="float-right">
+			<div>UPVOTE BUTTON</div>
+			<div><%= @report.votecount %></div>
+			<div>VOTES</div>
+		</div>
+	</div>
+
+	<div>
+		<% @report.comments.each do |comment| %>
+			<div><%= comment.content %></div>
+			<div><%= comment.created_at %></div>
+		<% end %>
+	</div>
+
+	<form action="/reports/<%= @report.id %>/new_comment" method="post">
+		<div><textarea name="content" id="report_comment" cols="30" rows="8" placeholder="Your Comment Here"></textarea></div>
+		<div><input type="submit" value="Submit Comment"></div>
+	</form>
+
+
+-----------------------
