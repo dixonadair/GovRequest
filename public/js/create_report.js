@@ -6,7 +6,7 @@ $(function(){
 			  formData = create_report.serialize();
 
 		$.ajax({
-			url: '/report/create',
+			url: '/reports/create',
 			type: 'POST',
 	    dataType: 'JSON',
 	    data: formData
