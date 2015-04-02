@@ -3,8 +3,9 @@ $(function(){
 	var geolocate = $('#geolocate');
 	var current_location_map = L.mapbox.map('current_location_map', 'yumiko.lkbilml1');
 	var myLayer = L.mapbox.featureLayer().addTo(current_location_map);
+			current_location_map.setView([37.734585, -122.447214], 12);
 
-	var markerGenerator = function(lat, lng, report_issue){
+	var markerGenerator = function(lat, lng, report_issue, report_id){
 		var marker = L.mapbox.featureLayer({
 	    type: 'Feature',
 	    geometry: {
@@ -13,7 +14,8 @@ $(function(){
 	    },
 	    properties: {
 	        title: report_issue,
-	        'marker-color': '#f86767'
+	        'marker-color': '#f86767',
+	        url: '/reports/' + parseInt(report_id)
 	    }
 		}).addTo(current_location_map);
 	}
@@ -21,7 +23,7 @@ $(function(){
 	var iterateReports = function(reportsData) {
 		for (var i = 0; i < 21; i++) {
 			console.log(reportsData[i].lat + " " + reportsData[i].lng);
-			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name);
+			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
 	  }
 	}
 
