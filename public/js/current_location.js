@@ -13,9 +13,8 @@ $(function(){
 	        coordinates: [parseFloat(lat), parseFloat(lng)]
 	    },
 	    properties: {
-	        title: report_issue,
-	        'marker-color': '#f86767',
-	        url: '/reports/' + parseInt(report_id)
+	        title: "<a href='http://localhost:9393/reports/"+report_id+"'>" + report_issue + "</a>",
+	        'marker-color': '#f86767'
 	    }
 		}).addTo(current_location_map);
 	}
