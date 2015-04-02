@@ -1,10 +1,11 @@
 $(function(){
 	L.mapbox.accessToken = 'pk.eyJ1IjoieXVtaWtvIiwiYSI6IkRDVk43ZjAifQ.aAdCw3xUw8s1QLZzcBUhbA';
-	var geolocate = $('#geolocate');
-	var current_location_map = L.mapbox.map('current_location_map', 'yumiko.lkbilml1');
-	var myLayer = L.mapbox.featureLayer().addTo(current_location_map);
+	var geolocate = $('#geolocate'),
+	    current_location_map = L.mapbox.map('current_location_map', 'yumiko.lkbilml1'),
+	    myLayer = L.mapbox.featureLayer().addTo(current_location_map);
+			current_location_map.setView([37.734585, -122.447214], 12);
 
-	var markerGenerator = function(lat, lng, report_issue){
+	var markerGenerator = function(lat, lng, report_issue, report_id){
 		var marker = L.mapbox.featureLayer({
 	    type: 'Feature',
 	    geometry: {
@@ -12,16 +13,16 @@ $(function(){
 	        coordinates: [parseFloat(lat), parseFloat(lng)]
 	    },
 	    properties: {
-	        title: report_issue,
+	        title: "<a href='http://localhost:9393/reports/"+report_id+"'>" + report_issue + "</a>",
 	        'marker-color': '#f86767'
 	    }
 		}).addTo(current_location_map);
 	}
 
 	var iterateReports = function(reportsData) {
-		for (var i = 0; i < 21; i++) {
+		for (var i = 0; i < 32; i++) {
 			console.log(reportsData[i].lat + " " + reportsData[i].lng);
-			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name);
+			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
 	  }
 	}
 
