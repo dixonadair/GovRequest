@@ -16,14 +16,8 @@ $(function(){
 	        title: "<a href='http://localhost:9393/reports/"+report_id+"'>" + report_issue + "</a>",
 	        'marker-color': '#f86767'
 	    }
-		}).addTo(current_location_map);
-	}
-
-	var iterateReports = function(reportsData) {
-		for (var i = 0; i < 11; i++) {
-			console.log(reportsData[i].lat + " " + reportsData[i].lng);
-			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
-	  }
+		});
+		marker.addTo(current_location_map);
 	}
 
   var list_of_reports = function(){
@@ -31,10 +25,18 @@ $(function(){
 			url: '/reports/show',
 			type: 'GET',
 		}).done(function(response){
-			iterateReports(response.collection);
+			iterateReports(response.collection, response.collection.length);
 		}).fail(function(error){
 			console.log('fail');
 		});
+	}
+
+	var iterateReports = function(reportsData, number_of_data) {
+		for (var i = 0; i < number_of_data; i++) {
+			console.log(reportsData[i].lat + " " + reportsData[i].lng);
+			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
+			console.log(i);
+	  }
 	}
 
   list_of_reports();
@@ -56,7 +58,7 @@ $(function(){
 	        type: 'Feature',
 	        geometry: {
 	            type: 'Point',
-	            coordinates: [e.latlng.lng, e.latlng.lat]
+	            coordinates: [e.latlng.lat, e.latlng.lng]
 	        },
 	        properties: {
 	            'title': 'Here I am!',
