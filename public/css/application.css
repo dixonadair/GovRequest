@@ -113,3 +113,13 @@
     border-top:1px dotted #bbb;
     padding:10px;
 }
+
+/* Front Page */
+.login_box {
+  margin-top: 200px;
+  padding: 0 auto;
+}
+
+.login_box button {
+  margin: 10px auto;
+}

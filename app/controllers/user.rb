@@ -1,20 +1,18 @@
 # ------ MAIN PAGE ------
 
 get '/' do
-	if session[:user_id]
-		id = User.find(session[:user_id])
-		@username = User.find(id).name
-	  erb :index
-	else
-	  redirect '/user/welcome'
-	end
+  if(session[:user_id])
+  	id = User.find(session[:user_id])
+  	@username = User.find(id).name
+  end
+	erb :index
 end
 
 # ------ Welcome, Login, Logout, Register ------
 
-get '/welcome' do
-	erb :'/user/welcome'
-end
+# get '/welcome' do
+# 	erb :'/user/welcome'
+# end
 
 get '/login' do
 	erb :'/user/login'
@@ -33,7 +31,7 @@ end
 
 get '/logout' do
   session[:user_id] = nil
-  redirect '/user/welcome'
+  redirect '/'
 end
 
 get '/register' do
