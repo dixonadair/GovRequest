@@ -9,9 +9,9 @@
   color:#FFF;
   display:block;
   position:absolute;
-  top:50%;left:50%;
+  top:90%;left:70%;
   width:160px;
-  margin:-20px 0 0 -80px;
+  /*margin:-20px 0 0 -80px;*/
   z-index:100;
   text-align:center;
   padding:10px;

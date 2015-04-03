@@ -10,20 +10,47 @@ $(function() {
 	current_location_map.setView([37.734585, -122.447214], 12);
 
 	// marker generating function
-	var markerGenerator = function(lat, lng, report_issue, report_id, issue) {
-		popupDescription = "<div class='pop_up_report_name'><a href='http://localhost:9393/reports/"+report_id+"'>" + report_issue + "</a></div><div class='popup_report_type'>" + issue +"</div>";
-		var marker = L.mapbox.featureLayer({
-		    type: 'Feature',
-		    geometry: {
-		        type: 'Point',
-		        coordinates: [parseFloat(lat), parseFloat(lng)]
-		    },
-		    properties: {
-		        title: popupDescription,
-		        'marker-color': '#0099FF'
-		    }
-		});
-		//debugger;
+	var markerGenerator = function(lat, lng, report_issue, report_id, issue, status) {
+		var marker;
+		popupDescription = "<div class='pop_up_report_name'><a href='http://localhost:9393/reports/"+report_id+"'>" + report_issue + "</a></div><div class='popup_report_type'>" + issue +"</div><div class='popup_status text-success'>"+status+"</div>";
+		if(status === 'pending'){
+			marker = L.mapbox.featureLayer({
+			    type: 'Feature',
+			    geometry: {
+			        type: 'Point',
+			        coordinates: [parseFloat(lat), parseFloat(lng)]
+			    },
+			    properties: {
+			        title: popupDescription,
+			        'marker-color': '#ff8888'
+			    }
+			});
+		}else if (status === 'in process'){
+			marker = L.mapbox.featureLayer({
+			    type: 'Feature',
+			    geometry: {
+			        type: 'Point',
+			        coordinates: [parseFloat(lat), parseFloat(lng)]
+			    },
+			    properties: {
+			        title: popupDescription,
+			        'marker-color': '#0099FF'
+			    }
+			});
+		}else{
+			marker = L.mapbox.featureLayer({
+			    type: 'Feature',
+			    geometry: {
+			        type: 'Point',
+			        coordinates: [parseFloat(lat), parseFloat(lng)]
+			    },
+			    properties: {
+			        title: popupDescription,
+			        'marker-color': '#00CC99'
+			    }
+			});
+		}
+
 		marker.addTo(current_location_map);
 	};
 
@@ -42,7 +69,7 @@ $(function() {
 	// iterate through list of reports and call markerGenerator function to generate markers for each
 	var iterateReports = function(reportsData, number_of_data) {
 		for (var i = 0; i < number_of_data; i++) {
-			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id, reportsData[i].report_type);
+			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id, reportsData[i].report_type, reportsData[i].status);
 	    }
 	};
 
@@ -70,7 +97,7 @@ $(function() {
 	        },
 	        properties: {
 	            'title': 'Here I am!',
-	            'marker-color': '#ff8888',
+	            'marker-color': '#0099FF',
 	            'marker-symbol': 'star'
 	        }
 	    });
