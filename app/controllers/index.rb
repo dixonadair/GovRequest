@@ -9,7 +9,7 @@ post '/reports/create' do
 	new_report.save
 	if request.xhr?
 		content_type :json
-		{data: params}.to_json
+		{data: new_report}.to_json
 	else
 		redirect '/'
 	end

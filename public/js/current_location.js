@@ -3,6 +3,7 @@ $(function() {
 	// Declare mapbox access token and set up map
 	L.mapbox.accessToken = 'pk.eyJ1IjoieXVtaWtvIiwiYSI6IkRDVk43ZjAifQ.aAdCw3xUw8s1QLZzcBUhbA';
 	
+	// Grab some variables
 	var geolocate = $('#geolocate'),
 	    current_location_map = L.mapbox.map('current_location_map', 'yumiko.lkbilml1'),
 	    myLayer = L.mapbox.featureLayer().addTo(current_location_map);
@@ -54,6 +55,8 @@ $(function() {
 		marker.addTo(current_location_map);
 	};
 
+	// -----------------
+
 	// function which gets collection of reports via ajax call and executes iterateReports on it
   	var list_of_reports = function() {
 		$.ajax({
@@ -75,6 +78,8 @@ $(function() {
 
 	// execute the list_of_reports function
   list_of_reports();
+
+  // -----------------
 
 	if (!navigator.geolocation) {
 	    geolocate.html('Geolocation is not available');
@@ -182,7 +187,7 @@ $(function() {
 			// form clear after submission
 			$('form').find("input[type=text], textarea").val("");
 			debugger;
-			markerGenerator(response.data.lat, response.data.lng, response.data.report_name, response.data.id, response.data.report_type, response.data.status);
+			markerGenerator(response.data.report.lat, response.data.report.lng, response.data.report.report_name, response.data.report.id, response.data.report.report_type, response.data.report.status);
 			$('#geolocate.ui-button').fadeOut('slow');
 		});
 		ajaxRequest.fail(function(error) {
@@ -216,8 +221,7 @@ $(function() {
 			}).done(function(response){
 				$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
 				$('form').find("input[type=text], textarea").val("");
-				debugger;
-				markerGenerator(response.data.lat, response.data.lng, response.data.report_name, response.data.id, response.data.report_type, response.data.status);
+				markerGenerator(response.data.report.lat, response.data.report.lng, response.data.report.report_name, response.data.report.id, response.data.report.report_type, response.data.report.status);
 				$('#geolocate.ui-button').fadeOut('slow');
 			}).fail(function(error){
 				console.log('fail');
