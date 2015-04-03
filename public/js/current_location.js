@@ -27,7 +27,7 @@ $(function() {
 
 	// iterate through list of reports and call markerGenerator function to generate markers for each
 	var iterateReports = function(reportsData) {
-		for (var i = 0; i < 32; i++) {
+		for (var i = 0; i < reportsData.length; i++) {
 			console.log(reportsData[i].lat + " " + reportsData[i].lng);
 			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
 	  	}
@@ -85,5 +85,51 @@ $(function() {
 	current_location_map.on('locationerror', function() {
 	    geolocate.html('Position could not be found');
 	});
+
+	// ------------- Example marker --------------
+
+	var marker2 = L.mapbox.featureLayer({
+	    type: 'Feature',
+	    geometry: {
+	        type: 'Point',
+	        coordinates: [-122, 37]
+	    },
+	    properties: {
+	        title: "Hi",
+	        'marker-color': '#f86767'
+	    }
+	});
+	marker2.addTo(current_location_map);
+
+	// ----- Example markers in downtown SF area -----
+
+	var lng_generator = function() {
+		var new_lng = (Math.floor(Math.random() * 25514)/1000000 + 37.772194);
+		console.log(new_lng);
+		return new_lng;
+	};
+
+	var lat_generator = function() {
+		var new_lat = (-1)*(Math.floor(Math.random() * 31811)/1000000 + 122.402006);
+		console.log(new_lat);
+		return new_lat;
+	};
+
+	for (i=1; i<20; i++) {
+		L.mapbox.featureLayer({
+		    type: 'Feature',
+		    geometry: {
+		        type: 'Point',
+		        // coordinates: [i*10, i*10]
+		        coordinates: [lat_generator(), lng_generator()]
+		    },
+		    properties: {
+		        title: "Hi",
+		        'marker-color': '#f86767'
+		    }
+		}).addTo(current_location_map);
+	}
+
+	// ---------------------------------------------
 
 });
