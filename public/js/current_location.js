@@ -27,13 +27,12 @@ $(function() {
 
 	// function which gets collection of reports via ajax call and executes iterateReports on it
   	var list_of_reports = function() {
-		var ajaxRequest = $.ajax({
-			url: '/reports/show'
-		});
-		ajaxRequest.done(function(response) {
-			iterateReports(response.collection);
-		});
-		ajaxRequest.fail(function(error) {
+		$.ajax({
+			url: '/list_all_reports',
+			type: 'GET',
+		}).done(function(response) {
+			iterateReports(response.collection, response.collection.length);
+		}).fail(function(error) {
 			console.log('fail');
 		});
 	};
@@ -43,7 +42,7 @@ $(function() {
 		for (var i = 0; i < number_of_data; i++) {
 			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
 	    }
-	}
+	};
 
 	// execute the list_of_reports function
   	list_of_reports();
@@ -56,7 +55,7 @@ $(function() {
 			e.stopPropagation();
 			current_location_map.locate();
 		});
-	};
+	}
 
 	current_location_map.on('locationfound', function(e) {
 	    current_location_map.fitBounds(e.bounds);
@@ -84,49 +83,49 @@ $(function() {
 	    geolocate.html('Position could not be found');
 	});
 
-	// ------------- Example marker --------------
+	// // ------------- Example marker --------------
 
-	var marker2 = L.mapbox.featureLayer({
-	    type: 'Feature',
-	    geometry: {
-	        type: 'Point',
-	        coordinates: [-122, 37]
-	    },
-	    properties: {
-	        title: "Hi",
-	        'marker-color': '#f86767'
-	    }
-	});
-	marker2.addTo(current_location_map);
+	// var marker2 = L.mapbox.featureLayer({
+	//     type: 'Feature',
+	//     geometry: {
+	//         type: 'Point',
+	//         coordinates: [-122, 37]
+	//     },
+	//     properties: {
+	//         title: "Hi",
+	//         'marker-color': '#f86767'
+	//     }
+	// });
+	// marker2.addTo(current_location_map);
 
-	// ----- Example markers in downtown SF area -----
+	// // ----- Example markers in downtown SF area -----
 
-	var lng_generator = function() {
-		var new_lng = (Math.floor(Math.random() * 25514)/1000000 + 37.772194);
-		console.log(new_lng);
-		return new_lng;
-	};
+	// var lng_generator = function() {
+	// 	var new_lng = (Math.floor(Math.random() * 25514)/1000000 + 37.772194);
+	// 	console.log(new_lng);
+	// 	return new_lng;
+	// };
 
-	var lat_generator = function() {
-		var new_lat = (-1)*(Math.floor(Math.random() * 31811)/1000000 + 122.402006);
-		console.log(new_lat);
-		return new_lat;
-	};
+	// var lat_generator = function() {
+	// 	var new_lat = (-1)*(Math.floor(Math.random() * 31811)/1000000 + 122.402006);
+	// 	console.log(new_lat);
+	// 	return new_lat;
+	// };
 
-	for (i=1; i<20; i++) {
-		L.mapbox.featureLayer({
-		    type: 'Feature',
-		    geometry: {
-		        type: 'Point',
-		        // coordinates: [i*10, i*10]
-		        coordinates: [lat_generator(), lng_generator()]
-		    },
-		    properties: {
-		        title: "Hi",
-		        'marker-color': '#f86767'
-		    }
-		}).addTo(current_location_map);
-	}
+	// for (i=1; i<20; i++) {
+	// 	L.mapbox.featureLayer({
+	// 	    type: 'Feature',
+	// 	    geometry: {
+	// 	        type: 'Point',
+	// 	        // coordinates: [i*10, i*10]
+	// 	        coordinates: [lat_generator(), lng_generator()]
+	// 	    },
+	// 	    properties: {
+	// 	        title: "Hi",
+	// 	        'marker-color': '#f86767'
+	// 	    }
+	// 	}).addTo(current_location_map);
+	// }
 
 	// ---------------------------------------------
 

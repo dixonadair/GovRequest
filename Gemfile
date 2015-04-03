@@ -3,6 +3,7 @@ ruby '2.0.0'
 
 # PostgreSQL driver
 gem 'pg'
+gem 'pry-debugger'
 
 # Sinatra driver
 gem 'sinatra'
