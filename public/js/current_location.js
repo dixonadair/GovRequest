@@ -58,7 +58,7 @@ $(function(){
 	        type: 'Feature',
 	        geometry: {
 	            type: 'Point',
-	            coordinates: [e.latlng.lat, e.latlng.lng]
+	            coordinates: [e.latlng.lng, e.latlng.lat]
 	        },
 	        properties: {
 	            'title': 'Here I am!',
