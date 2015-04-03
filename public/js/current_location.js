@@ -20,7 +20,7 @@ $(function(){
 	}
 
 	var iterateReports = function(reportsData) {
-		for (var i = 0; i < 32; i++) {
+		for (var i = 0; i < 11; i++) {
 			console.log(reportsData[i].lat + " " + reportsData[i].lng);
 			markerGenerator(reportsData[i].lat, reportsData[i].lng, reportsData[i].report_name,reportsData[i].id);
 	  }

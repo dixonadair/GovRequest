@@ -25,6 +25,7 @@ $(function(){
 
 	$('#reportSubmit').on('click', function(event){
 		event.preventDefault();
+		debugger;
 		var report_address = $("#report_address").val();   
 		    
 		if (report_address !== ''){
@@ -34,6 +35,17 @@ $(function(){
 		    console.log(data.latlng[0], data.latlng[1]);
 		    getUserGeoinfo(data.latlng[0], data.latlng[1]);
 		  }
+		}else{
+			$.ajax({
+						url: '/reports/create',
+						type: 'POST',
+				    dataType: 'JSON',
+				    data: formData
+					}).done(function(response){
+						$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
+					}).fail(function(error){
+						console.log('fail');
+					});
 		}
 
 	});
