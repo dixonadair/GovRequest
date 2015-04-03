@@ -27,6 +27,7 @@ $(function(){
 			$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
 			// form clear after submission
 			$('form').find("input[type=text], textarea").val("");
+			$('#geolocate.ui-button').fadeOut('slow');
 		});
 		ajaxRequest.fail(function(error) {
 			console.log('fail');
@@ -59,6 +60,7 @@ $(function(){
 			}).done(function(response){
 				$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
 				$('form').find("input[type=text], textarea").val("");
+				$('#geolocate.ui-button').fadeOut('slow');
 			}).fail(function(error){
 				console.log('fail');
 			});
