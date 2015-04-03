@@ -175,8 +175,7 @@ $(function() {
 		user_current_lng.val(lng);
 		// the lat + lng info is now in the formData, so serialize the formData now
 		formData = create_report.serialize();
-
-  		var ajaxRequest = $.ajax({
+  	var ajaxRequest = $.ajax({
 				url: '/reports/create',
 				type: 'POST',
 		    	dataType: 'JSON',
@@ -186,7 +185,6 @@ $(function() {
 			$('.welcome_section').append('<div class="text-danger">Thank you for sending us a report!</div>');
 			// form clear after submission
 			$('form').find("input[type=text], textarea").val("");
-			debugger;
 			markerGenerator(response.data.report.lat, response.data.report.lng, response.data.report.report_name, response.data.report.id, response.data.report.report_type, response.data.report.status);
 			$('#geolocate.ui-button').fadeOut('slow');
 		});
@@ -210,8 +208,8 @@ $(function() {
 			// getJsonDataFromMapBox() takes an error (if any), and the JSON data from running geocoder.query(). That data has several things, including a latlng array ([lat, lng]), which we want.
 			function getJsonDataFromMapBox(err, data) {
 				// Execute getUserGeoinfo function/ajax request
-			    getUserGeoinfo(data.latlng[1], data.latlng[0]);
-		    }
+		    getUserGeoinfo(data.latlng[1], data.latlng[0]);
+	    }
 		} else {
 			$.ajax({
 				url: '/reports/create',
