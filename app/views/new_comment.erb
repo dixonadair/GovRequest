@@ -1,36 +1,46 @@
-<div>
+<div class="container">
+	<main>
+		<div class="row">
+		
+			<div class="col-md-6">
+				<%= erb :current_location_map %>
+			</div>
 
-	<div class="detailBox">
-	    <div class="titleBox">
-	      <label><%= @report.report_name %></label>
-	        <button type="button" class="close" aria-hidden="true">&times;</button>
-	    </div>
-	    <div class="commentBox">
-	        <p class="taskDescription"><%= @report_creator.name %> created this report at <%= @report.created_at %></p>
-	    </div>
-	    <div class="actionBox">
-	      <ul class="commentList">
-	        <% @report.comments.each do |comment| %>	
-	            <li>
-	                <div class="commenterImage">
-	                  <img src="http://lorempixel.com/50/50/people/6" />
-	                </div>
-	                <div class="commentText">
-	                    <p class=""><%= comment.content %>.</p> <span class="date sub-text">on <%= comment.created_at %></span>
-	                </div>
-	            </li>
-					<% end %>
-	      </ul>
+			<div class="col-md-5 col-md-offset-1">  
+				<div class="detailBox">
+					    <div class="titleBox">
+					      <label><%= @report.report_name %></label>
+					        <button type="button" class="close" aria-hidden="true">&times;</button>
+					    </div>
+					    <div class="commentBox">
+					        <p class="taskDescription"><%= @report_creator.name %> created this report at <%= @report.created_at %></p>
+					    </div>
+					    <div class="actionBox">
+					      <ul class="commentList">
+					        <% @report.comments.each do |comment| %>	
+					            <li>
+					                <div class="commenterImage">
+					                  <img src="http://lorempixel.com/50/50/people/6" />
+					                </div>
+					                <div class="commentText">
+					                    <p class=""><%= comment.content %>.</p> <span class="date sub-text">on <%= comment.created_at %></span>
+					                </div>
+					            </li>
+									<% end %>
+					      </ul>
 
-	        <form action="/reports/<%= @report.id %>/new_comment" method="post" class="form-inline" role="form">
-	            <div class="form-group">
-	                <input class="form-control" name="content" type="text" placeholder="Your comments" />
-	            </div>
-	            <div class="form-group">
-	            		<input class="btn btn-default" type="submit" value="Add">
-	            </div>
-	        </form>
-	    </div>
-	</div>
+					      <form action="/reports/<%= @report.id %>/new_comment" method="post" class="form-inline" role="form">
+					            <div class="form-group">
+					                <input class="form-control" name="content" type="text" placeholder="Your comments" />
+					            </div>
+					            <div class="form-group">
+					            		<input class="btn btn-default" type="submit" value="Add">
+					            </div>
+					        </form>
+					    </div>
+					</div>
+				</div>
 
+		</div>
+	</main>
 </div>

@@ -1,15 +1,17 @@
 <div class="container">
 	<main>
-		<div class="row">
 		
+		<div class="row">
 			<div class="col-md-6">
 				<%= erb :current_location_map %>
 			</div>
-
+			<% if session[:user_id] %>
 			<div class="col-md-5 col-md-offset-1">
 				<%= erb :create_report, locals: {username: @username} %>
 			</div>
-
 		</div>
+		<% else %>
+				<%= erb :front_page %>
+		<% end %>
 	</main>
 </div>
