@@ -3,6 +3,7 @@ post '/' do
 end
 
 post '/reports/create' do
+	# create report in DB from inputted params
 	new_report = Report.new(params[:report])
 	new_report.user_id = session[:user_id]
 	new_report.save
@@ -14,6 +15,8 @@ post '/reports/create' do
 	end
 end
 
+# ------ Show all reports ------
+
 get '/reports/show' do
 	@all_reports = Report.all
 	if request.xhr?
@@ -24,3 +27,4 @@ get '/reports/show' do
 	end
 end
 
+# ------ END ------

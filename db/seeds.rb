@@ -11,8 +11,8 @@ department_names.each do |department|
 	Department.create(dept_name: department)
 end
 
-(37.772194 + (rand(25514).to_f/1000000)) # random lat in SF
-(122.402006 + (rand(31811).to_f/1000000)) # random lng in SF
+# (37.772194 + (rand(25514).to_f/1000000)) # random lat in SF
+# (122.402006 + (rand(31811).to_f/1000000)) # random lng in SF
 
 report_types = %w[pothole street_light transformer power_line tree fire_hydrant road_sign sewage other]
 
