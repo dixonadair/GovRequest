@@ -1,5 +1,5 @@
 post '/' do
-	redirect :index
+		redirect :index
 end
 
 post '/reports/create' do
