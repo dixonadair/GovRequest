@@ -17,7 +17,7 @@ end
 
 # ------ Show all reports ------
 
-get '/reports/show' do
+get '/list_all_reports' do
 	@all_reports = Report.all
 	if request.xhr?
 		content_type :json
