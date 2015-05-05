@@ -81,3 +81,12 @@
 
 
 -----------------------
+
+Yumiko's Access token (from current_location.js file)
+
+// L.mapbox.accessToken = 'pk.eyJ1IjoieXVtaWtvIiwiYSI6IkRDVk43ZjAifQ.aAdCw3xUw8s1QLZzcBUhbA';
+
+// Grab some variables
+// var geolocate = $('#geolocate'), // the "find me" button
+//     current_location_map = L.mapbox.map('current_location_map', 'yumiko.lkbilml1'),
+//     myLayer = L.mapbox.featureLayer().addTo(current_location_map);
